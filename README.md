@@ -1,58 +1,179 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+#  1. Week 4 Mini Project 03: Student Registration System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 2. Introduction
+This project is a simple Student Registration System made using Laravel. It allows a user to enter student information and register it into the system.
 
-## About Laravel
+The system has a registration form where the user can enter the student's ID, name, email, mobile number, date of birth, gender, program, year level, address, and profile picture.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The information is checked before it is saved. If there are errors, the system will show the errors on the form. If everything is correct, the student information will be saved in the MySQL database and the uploaded profile picture will be stored using Laravel Storage.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This project was created for the Week 4 laboratory activity of ITST 302 – Client-Server Technologies.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 3. Objectives
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The main objectives of this project are:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* To learn how to create a Laravel project.
+* To create a student registration form using Blade.
+* To use Laravel routes and controllers.
+* To learn how Laravel validation works.
+* To save data in a MySQL database.
+* To upload and store an image using Laravel Storage.
+* To display success messages and validation errors.
+* To understand the basic Laravel request process.
+* To use Git and GitHub for the project.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 4. Laravel Request Lifecycle
+The basic process of the Student Registration System is:
+**Browser → Route → Controller → Validation → Model → Database → Response**
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Browser
+The user opens the student registration page and fills out the form.
 
-```bash
-composer require laravel/boost --dev
+### 2. Route
+Laravel receives the request and checks the route in `routes/web.php`.
 
-php artisan boost:install
-```
+### 3. Controller
+The `StudentController` handles the request.
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 4. Validation
+The information is checked to make sure that the required fields are complete and the values are valid.
 
-## Contributing
+### 5. Model
+The `Student` model is used to work with the student data.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 6. Database
+The student information is saved in the `students` table in MySQL.
 
-## Code of Conduct
+### 7. Response
+Laravel returns a response to the user. It can show validation errors or a successful registration message.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## Validation Rules
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The system checks the information before saving it.
+
+Some of the validation rules are:
+
+| Field                | Validation                       |
+| -------------------- | -------------------------------- |
+| Student ID           | Required and unique              |
+| First Name           | Required                         |
+| Middle Name          | Optional                         |
+| Last Name            | Required                         |
+| Email                | Required, valid email and unique |
+| Mobile Number        | Required and numeric             |
+| Date of Birth        | Required                         |
+| Gender               | Required                         |
+| Program              | Required                         |
+| Year Level           | Required                         |
+| Address              | Required                         |
+| Profile Picture      | Required image                   |
+| Profile Picture Type | JPG, JPEG, PNG                   |
+| Profile Picture Size | Maximum 2 MB                     |
+
+If the information is not correct, Laravel returns the user to the form and displays the errors.
+
+---
+
+## 6. Database Design
+The system uses a MySQL database named:
+`week04_student_registration`
+The main table used by the project is:
+`students`
+
+### Students Table
+
+| Column          | Description                 |
+| --------------- | --------------------------- |
+| id              | Primary key                 |
+| student_id      | Student ID                  |
+| first_name      | Student first name          |
+| middle_name     | Student middle name         |
+| last_name       | Student last name           |
+| email           | Student email               |
+| mobile_number   | Student mobile number       |
+| gender          | Student gender              |
+| date_of_birth   | Student date of birth       |
+| program         | Student program             |
+| year_level      | Student year level          |
+| address         | Student address             |
+| profile_picture | Path of uploaded picture    |
+| created_at      | Date the record was created |
+| updated_at      | Date the record was updated |
+
+The `student_id` and `email` fields are unique.
+
+The profile picture is not saved directly in the database. Only its file path is saved.
+
+### ER Diagram
+
+Insert the ER diagram here.
+
+**Figure 1. Student Registration System ER Diagram**
+
+---
+
+## 7. Flowchart
+
+
+
+---
+
+## 8. Screenshots
+![Registration Form](screenshots/Registration_Form.png)
+![Validation Errors](screenshots/Validation_Errors.png)
+![Successful Registrations](<screenshots/Successful_Registration - Copy.png>)
+![Flash Message](<screenshots/Flash_message - Copy.png>)
+![Uploaded Profile Picture](screenshots/Uploaded_Profile_Picture.png)
+![Database Table](screenshots/Database_Table.png)
+![Student Profile Page](screenshots/Student_Profile_Page.png)
+![VS Code Project Structure](screenshots/VS_Code_Project_Structure.png)
+
+
+---
+
+## 9. Problems Encountered 
+None
+
+## 10.  Solution
+None
+
+
+
+---
+
+## 11. Reflection
+
+This project helped me understand Laravel better because I was able to create a small system from the beginning. Before doing this activity, I knew some basic programming concepts, but I was not very familiar with how Laravel connects the different parts of a web application.
+
+One of the things I learned is how routes work. The route tells Laravel where a request should go. I also learned about controllers and how they handle the actions of the system. The `StudentController` is responsible for handling the registration process and showing the student information.
+
+I also learned how to create a migration. The migration allowed me to create the students table in MySQL using Laravel. I learned that the migration is important because it defines the columns that will be stored in the database. I also learned how the Student model is connected to the students table.
+
+Another part that I learned is validation. It is important because users can enter wrong or incomplete information. Laravel can check the submitted data before saving it. I learned how to check required fields, unique values, email format, and uploaded files.
+
+The profile picture upload was also something new for me. I learned that the actual image does not need to be stored inside the database. Instead, Laravel stores the file and the database keeps the path of the image.
+
+I also experienced some problems while making the project. There were times when I needed to check the terminal and make sure that the commands were being run in the correct folder. I also needed to understand how the database, migration, model, controller, routes, and Blade pages work together.
+
+Overall, this activity helped me understand the basic Laravel workflow better. I learned that building a system is not only about writing code. Each part has its own purpose, and they need to work together. This project also gave me more confidence in using Laravel, MySQL, and GitHub for future projects.
+
+---
+
+## 12. References
+
+Laravel. (n.d.). *Laravel documentation*. https://laravel.com/docs
+
+Laravel. (n.d.). *File storage*. https://laravel.com/docs/filesystem
+
+Laravel. (n.d.). *Validation*. https://laravel.com/docs/validation
+
+MySQL. (n.d.). *MySQL documentation*. https://dev.mysql.com/doc/
