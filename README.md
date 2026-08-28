@@ -115,15 +115,13 @@ The profile picture is not saved directly in the database. Only its file path is
 
 ### ER Diagram
 
-Insert the ER diagram here.
-
-**Figure 1. Student Registration System ER Diagram**
+![ER diagram](screenshots/ER_diagram.png)
 
 ---
 
 ## 7. Flowchart
 
-
+![Flowchart](screenshots/Flowchart.png)
 
 ---
 
@@ -136,7 +134,7 @@ Insert the ER diagram here.
 ![Database Table](screenshots/Database_Table.png)
 ![Student Profile Page](screenshots/Student_Profile_Page.png)
 ![VS Code Project Structure](screenshots/VS_Code_Project_Structure.png)
-
+![GitHub Repository](<screenshots/Flash_message - Copy.png>)
 
 ---
 
