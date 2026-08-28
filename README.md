@@ -175,3 +175,6 @@ Laravel. (n.d.). *File storage*. https://laravel.com/docs/filesystem
 Laravel. (n.d.). *Validation*. https://laravel.com/docs/validation
 
 MySQL. (n.d.). *MySQL documentation*. https://dev.mysql.com/doc/
+
+---
+
